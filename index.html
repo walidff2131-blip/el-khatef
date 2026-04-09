@@ -6,9 +6,6 @@
   <title>الخاطف - El Khatef 🇩🇿</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* =============================================
-       CSS VARIABLES - نظام الألوان
-    ============================================= */
     :root {
       --green:       #00c853;
       --green-dim:   #00963e;
@@ -24,445 +21,183 @@
       --border:      #00c85344;
       --font-main:   'Cairo', 'Tajawal', sans-serif;
     }
-
-    /* =============================================
-       RESET & BASE
-    ============================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-main);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
+      background: var(--black); color: var(--white);
+      font-family: var(--font-main); min-height: 100vh;
+      overflow-x: hidden; position: relative;
     }
-
-    /* =============================================
-       MATRIX CANVAS BACKGROUND
-    ============================================= */
     #matrix-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-      opacity: 0.07;
-      pointer-events: none;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; opacity: 0.07; pointer-events: none;
     }
-
-    /* Algerian geometric overlay */
     .geo-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none;
       background-image:
-        repeating-linear-gradient(
-          60deg,
-          transparent,
-          transparent 40px,
-          #00c85306 40px,
-          #00c85306 41px
-        ),
-        repeating-linear-gradient(
-          -60deg,
-          transparent,
-          transparent 40px,
-          #00c85306 40px,
-          #00c85306 41px
-        ),
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 80px,
-          #00c85304 80px,
-          #00c85304 81px
-        );
+        repeating-linear-gradient(60deg,transparent,transparent 40px,#00c85306 40px,#00c85306 41px),
+        repeating-linear-gradient(-60deg,transparent,transparent 40px,#00c85306 40px,#00c85306 41px),
+        repeating-linear-gradient(0deg,transparent,transparent 80px,#00c85304 80px,#00c85304 81px);
     }
-
-    /* =============================================
-       MAIN WRAPPER
-    ============================================= */
     .wrapper {
-      position: relative;
-      z-index: 10;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative; z-index: 10; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
       padding: 20px 16px 60px;
     }
-
-    /* =============================================
-       HEADER - الرأس
-    ============================================= */
     header {
-      width: 100%;
-      max-width: 700px;
-      text-align: center;
-      padding: 40px 0 30px;
-      position: relative;
+      width: 100%; max-width: 700px; text-align: center;
+      padding: 40px 0 30px; position: relative;
     }
-
-    /* Corner Karakou decoration */
     .corner-deco {
-      position: absolute;
-      font-size: 2.2rem;
-      opacity: 0.5;
+      position: absolute; font-size: 2.2rem; opacity: 0.5;
       filter: drop-shadow(0 0 8px var(--green));
       animation: float 4s ease-in-out infinite;
     }
     .corner-deco.tl { top: 10px; right: 0; animation-delay: 0s; }
-    .corner-deco.tr { top: 10px; left: 0; animation-delay: 1s; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-8px); }
-    }
-
+    .corner-deco.tr { top: 10px; left: 0;  animation-delay: 1s; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
     .flag-title {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: inline-flex; align-items: center;
+      gap: 14px; flex-wrap: wrap; justify-content: center;
     }
-
     h1 {
-      font-size: clamp(2rem, 8vw, 3.6rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -1px;
+      font-size: clamp(2rem, 8vw, 3.6rem); font-weight: 900;
+      line-height: 1.1; letter-spacing: -1px;
       background: linear-gradient(135deg, var(--green) 0%, #00ff6a 50%, var(--green) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: none;
-      filter: drop-shadow(0 0 20px var(--green));
-      font-family: 'Cairo', sans-serif;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 20px var(--green)); font-family: 'Cairo', sans-serif;
     }
+    .flag-emoji { font-size: clamp(2rem, 7vw, 3.2rem); filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+    .subtitle { margin-top: 10px; font-size: clamp(0.85rem,3vw,1.1rem); color: var(--white-dim); font-weight: 400; letter-spacing: 1px; font-family: 'Tajawal',sans-serif; }
+    .subtitle span { color: var(--green); font-weight: 600; }
+    .scanline { width: 80%; max-width: 400px; height: 2px; margin: 16px auto 0; background: linear-gradient(90deg,transparent,var(--green),transparent); animation: scan 3s linear infinite; }
+    @keyframes scan { 0%,100%{opacity:.3;transform:scaleX(.6)} 50%{opacity:1;transform:scaleX(1)} }
 
-    .flag-emoji {
-      font-size: clamp(2rem, 7vw, 3.2rem);
-      filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
-    }
-
-    .subtitle {
-      margin-top: 10px;
-      font-size: clamp(0.85rem, 3vw, 1.1rem);
-      color: var(--white-dim);
-      font-weight: 400;
-      letter-spacing: 1px;
-      font-family: 'Tajawal', sans-serif;
-    }
-    .subtitle span {
-      color: var(--green);
-      font-weight: 600;
-    }
-
-    /* Scanline animation under title */
-    .scanline {
-      width: 80%;
-      max-width: 400px;
-      height: 2px;
-      margin: 16px auto 0;
-      background: linear-gradient(90deg, transparent, var(--green), transparent);
-      animation: scan 3s linear infinite;
-    }
-    @keyframes scan {
-      0%   { opacity: 0.3; transform: scaleX(0.6); }
-      50%  { opacity: 1;   transform: scaleX(1); }
-      100% { opacity: 0.3; transform: scaleX(0.6); }
-    }
-
-    /* =============================================
-       MAIN CARD - البطاقة الرئيسية
-    ============================================= */
+    /* Card */
     .card {
-      width: 100%;
-      max-width: 680px;
-      background: var(--black-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 24px;
-      margin-top: 10px;
-      box-shadow:
-        0 0 0 1px #00c85311,
-        0 0 40px #00c85318,
-        inset 0 1px 0 #00c85322;
-      backdrop-filter: blur(10px);
-      transition: box-shadow 0.4s ease;
-    }
-    .card:hover {
-       box-shadow: 0 0 50px var(--green-glow);
+      width: 100%; max-width: 680px; background: var(--black-card);
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 28px 24px; margin-top: 10px;
+      box-shadow: 0 0 0 1px #00c85311, 0 0 40px #00c85318, inset 0 1px 0 #00c85322;
     }
 
-    /* =============================================
-       INPUT SECTION
-    ============================================= */
-    .input-label {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--green-dim);
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      font-family: 'Tajawal', sans-serif;
-    }
+    /* Input */
+    .input-label { display: block; font-size: .82rem; color: var(--green-dim); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; font-family: 'Tajawal',sans-serif; }
+    .input-wrap { display: flex; border: 1.5px solid var(--green-dim); border-radius: 10px; overflow: hidden; transition: border-color .3s,box-shadow .3s; background: #000d00; }
+    .input-wrap:focus-within { border-color: var(--green); box-shadow: 0 0 20px var(--green-glow); }
+    #url-input { flex:1; background:transparent; border:none; outline:none; padding:14px 16px; font-size:.97rem; color:var(--white); font-family:'Cairo',sans-serif; direction:ltr; caret-color:var(--green); }
+    #url-input::placeholder { color:#3a7a3a; font-size:.88rem; direction:ltr; }
+    .paste-btn { background:var(--green-dark); border:none; border-right:1.5px solid var(--green-dim); color:var(--green); padding:0 14px; cursor:pointer; font-size:1.1rem; transition:background .2s; flex-shrink:0; }
+    .paste-btn:hover { background:#005a25; }
+    .paste-btn:active { background:var(--green-dim); }
 
-    .input-wrap {
-      display: flex;
-      gap: 0;
-      border: 1.5px solid var(--green-dim);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: border-color 0.3s, box-shadow 0.3s;
-      background: #000d00;
-    }
-    .input-wrap:focus-within {
-      border-color: var(--green);
-      box-shadow: 0 0 20px var(--green-glow);
-    }
+    /* Badges */
+    .platforms { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+    .badge { font-size:.72rem; font-family:'Tajawal',sans-serif; background:#001a00; border:1px solid #00c85333; color:var(--green-dim); padding:3px 9px; border-radius:20px; letter-spacing:.5px; }
 
-    #url-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      padding: 14px 16px;
-      font-size: 0.97rem;
-      color: var(--white);
-      font-family: 'Cairo', sans-serif;
-      direction: ltr;
-      caret-color: var(--green);
-    }
-    #url-input::placeholder {
-      color: #3a7a3a;
-      font-size: 0.88rem;
-      direction: ltr;
-    }
+    /* API status */
+    .api-status-row { display:flex; align-items:center; gap:7px; margin-top:10px; font-size:.72rem; font-family:'Tajawal',sans-serif; color:var(--white-dim); }
+    .api-dot { width:8px; height:8px; border-radius:50%; background:#3a7a3a; flex-shrink:0; transition:background .4s,box-shadow .4s; }
+    .api-dot.checking { background:#c8a800; box-shadow:0 0 6px #c8a80088; animation:pulseDot 1s infinite; }
+    .api-dot.online   { background:var(--green); box-shadow:0 0 8px var(--green-glow); }
+    .api-dot.offline  { background:var(--red);   box-shadow:0 0 6px var(--red-glow); }
+    @keyframes pulseDot { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-    .paste-btn {
-      background: var(--green-dark);
-      border: none;
-      border-right: 1.5px solid var(--green-dim);
-      color: var(--green);
-      padding: 0 14px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
-    .paste-btn:hover { background: #005a25; }
+    /* Options */
+    .section-title { font-size:.78rem; color:var(--green-dim); font-weight:600; letter-spacing:2px; text-transform:uppercase; margin:22px 0 10px; font-family:'Tajawal',sans-serif; }
+    .options-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .option-card { position:relative; cursor:pointer; }
+    .option-card input[type="radio"] { position:absolute; opacity:0; width:0; height:0; }
+    .option-card .option-inner { display:flex; align-items:center; gap:10px; padding:13px 14px; background:#001000; border:1.5px solid #1a4a1a; border-radius:10px; transition:all .25s; user-select:none; }
+    .option-card input:checked + .option-inner { border-color:var(--green); background:var(--green-dark); box-shadow:0 0 14px var(--green-glow); }
+    .option-card .option-inner:hover { border-color:var(--green-dim); background:#001a00; }
+    .option-icon { font-size:1.5rem; }
+    .option-text { display:flex; flex-direction:column; }
+    .option-name { font-size:.93rem; font-weight:700; color:var(--white); font-family:'Cairo',sans-serif; }
+    .option-desc { font-size:.7rem; color:var(--white-dim); font-family:'Tajawal',sans-serif; }
 
-    .platforms {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-    .badge {
-      font-size: 0.72rem;
-      font-family: 'Tajawal', sans-serif;
-      background: #001a00;
-      border: 1px solid #00c85333;
-      color: var(--green-dim);
-      padding: 3px 9px;
-      border-radius: 20px;
-    }
+    /* Quality */
+    .quality-row { display:flex; align-items:center; gap:10px; margin-top:10px; }
+    .quality-row label { font-size:.78rem; color:var(--green-dim); font-family:'Tajawal',sans-serif; font-weight:600; white-space:nowrap; }
+    select#quality { background:#001000; border:1.5px solid #1a4a1a; color:var(--white); padding:7px 12px; border-radius:8px; font-family:'Cairo',sans-serif; font-size:.88rem; outline:none; cursor:pointer; transition:border-color .25s; flex:1; }
+    select#quality:focus { border-color:var(--green); box-shadow:0 0 10px var(--green-glow); }
 
-    /* =============================================
-       RADIO OPTIONS - نوع التحميل
-    ============================================= */
-    .section-title {
-      font-size: 0.78rem;
-      color: var(--green-dim);
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin: 22px 0 10px;
-      font-family: 'Tajawal', sans-serif;
-    }
+    /* Main button */
+    .btn-khatef { width:100%; margin-top:22px; padding:17px; background:linear-gradient(135deg,#00963e 0%,#00c853 50%,#00e676 100%); border:none; border-radius:12px; color:#000; font-size:1.2rem; font-weight:900; font-family:'Cairo',sans-serif; cursor:pointer; position:relative; overflow:hidden; transition:transform .15s,box-shadow .3s; box-shadow:0 4px 24px #00c85355; letter-spacing:1px; }
+    .btn-khatef::before { content:''; position:absolute; top:-50%; left:-60%; width:50%; height:200%; background:rgba(255,255,255,.15); transform:skewX(-20deg); transition:left .5s; }
+    .btn-khatef:hover::before { left:130%; }
+    .btn-khatef:hover { transform:translateY(-2px); box-shadow:0 8px 32px #00c85377; }
+    .btn-khatef:active { transform:scale(.98); }
+    .btn-khatef:disabled { background:#1a3a1a; color:#3a7a3a; cursor:not-allowed; transform:none; box-shadow:none; }
 
-    .options-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+    /* Status area */
+    #status-area { margin-top:20px; }
 
-    .option-card {
-      position: relative;
-      cursor: pointer;
-    }
-    .option-card input[type="radio"] {
-      position: absolute;
-      opacity: 0;
-      width: 0; height: 0;
-    }
-    .option-card .option-inner {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 14px;
-      background: #001000;
-      border: 1.5px solid #1a4a1a;
-      border-radius: 10px;
-      transition: all 0.25s;
-    }
-    .option-card input:checked + .option-inner {
-      border-color: var(--green);
-      background: var(--green-dark);
-      box-shadow: 0 0 14px var(--green-glow);
-    }
-    .option-icon { font-size: 1.5rem; }
-    .option-name {
-      font-size: 0.93rem;
-      font-weight: 700;
-      color: var(--white);
-      font-family: 'Cairo', sans-serif;
-    }
-    .option-desc {
-      font-size: 0.7rem;
-      color: var(--white-dim);
-      font-family: 'Tajawal', sans-serif;
-    }
+    /* Loading */
+    .loading-box { display:flex; flex-direction:column; align-items:center; gap:14px; padding:24px; background:var(--black-panel); border:1px solid #00c85333; border-radius:12px; animation:fadeIn .4s ease; }
+    .loader-ring { width:52px; height:52px; border:3px solid #001a00; border-top:3px solid var(--green); border-radius:50%; animation:spin .9s linear infinite; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .loading-text { font-size:1rem; color:var(--green); font-family:'Cairo',sans-serif; font-weight:600; text-align:center; animation:pulseDot 1.5s ease infinite; }
+    .loading-sub { font-size:.8rem; color:var(--white-dim); font-family:'Tajawal',sans-serif; text-align:center; }
 
-    .quality-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .quality-row label {
-      font-size: 0.78rem;
-      color: var(--green-dim);
-      font-family: 'Tajawal', sans-serif;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    select#quality {
-      background: #001000;
-      border: 1.5px solid #1a4a1a;
-      color: var(--white);
-      padding: 7px 12px;
-      border-radius: 8px;
-      font-family: 'Cairo', sans-serif;
-      flex: 1;
-    }
+    /* Instance bar */
+    .instances-bar { width:100%; display:flex; flex-direction:column; gap:5px; }
+    .instance-row { display:flex; align-items:center; gap:8px; font-size:.72rem; font-family:'Tajawal',sans-serif; color:var(--white-dim); }
+    .inst-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:#1a4a1a; transition:background .3s; }
+    .inst-dot.trying  { background:#c8a800; animation:pulseDot .8s infinite; }
+    .inst-dot.success { background:var(--green); }
+    .inst-dot.fail    { background:var(--red); }
 
-    /* =============================================
-       MAIN ACTION BUTTON
-    ============================================= */
-    .btn-khatef {
-      width: 100%;
-      margin-top: 22px;
-      padding: 17px;
-      background: linear-gradient(135deg, #00963e 0%, #00c853 50%, #00e676 100%);
-      border: none;
-      border-radius: 12px;
-      color: #000;
-      font-size: 1.2rem;
-      font-weight: 900;
-      font-family: 'Cairo', sans-serif;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.15s, box-shadow 0.3s;
-      box-shadow: 0 4px 24px #00c85355;
-    }
-    .btn-khatef:hover { transform: translateY(-2px); box-shadow: 0 8px 32px #00c85377; }
-    .btn-khatef:active { transform: scale(0.98); }
-    .btn-khatef:disabled { background: #1a3a1a; color: #3a7a3a; cursor: not-allowed; }
+    /* Dots */
+    .dots span { display:inline-block; width:7px; height:7px; background:var(--green); border-radius:50%; margin:0 3px; animation:dotB 1.2s ease infinite; }
+    .dots span:nth-child(2){animation-delay:.2s}
+    .dots span:nth-child(3){animation-delay:.4s}
+    @keyframes dotB { 0%,100%{transform:translateY(0);opacity:.4} 50%{transform:translateY(-6px);opacity:1} }
 
-    #status-area { margin-top: 20px; }
-    .loading-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      padding: 24px;
-      background: var(--black-panel);
-      border: 1px solid #00c85333;
-      border-radius: 12px;
-    }
-    .loader-ring {
-      width: 52px; height: 52px;
-      border: 3px solid #001a00;
-      border-top: 3px solid var(--green);
-      border-radius: 50%;
-      animation: spin 0.9s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    /* Result */
+    .result-box { background:var(--black-panel); border:1.5px solid var(--green); border-radius:12px; padding:20px; animation:fadeIn .5s ease; box-shadow:0 0 30px var(--green-glow); }
+    .result-top { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .success-icon { width:34px; height:34px; background:var(--green); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .result-title { font-size:1rem; font-weight:700; color:var(--green); font-family:'Cairo',sans-serif; }
+    .result-sub { font-size:.78rem; color:var(--white-dim); font-family:'Tajawal',sans-serif; }
+    .btn-download { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:15px; background:linear-gradient(135deg,var(--green-dim),var(--green)); color:#000; font-size:1.08rem; font-weight:900; font-family:'Cairo',sans-serif; text-decoration:none; border-radius:10px; transition:transform .15s,box-shadow .3s; box-shadow:0 4px 20px #00c85544; letter-spacing:.5px; }
+    .btn-download:hover { transform:translateY(-2px); box-shadow:0 8px 28px #00c85566; }
+    .btn-download:active { transform:scale(.98); }
+    .btn-reset { width:100%; margin-top:10px; padding:10px; background:transparent; border:1px solid #1a4a1a; border-radius:8px; color:var(--white-dim); font-size:.88rem; font-family:'Tajawal',sans-serif; cursor:pointer; transition:all .2s; }
+    .btn-reset:hover { border-color:var(--green-dim); color:var(--white); }
 
-    .result-box {
-      background: var(--black-panel);
-      border: 1.5px solid var(--green);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 30px var(--green-glow);
-    }
-    .btn-download {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, var(--green-dim), var(--green));
-      color: #000;
-      font-weight: 900;
-      text-decoration: none;
-      border-radius: 10px;
-    }
+    /* Error */
+    .error-box { background:#100000; border:1.5px solid var(--red); border-radius:12px; padding:16px 18px; animation:fadeIn .4s ease; box-shadow:0 0 20px var(--red-glow); }
+    .error-top { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+    .error-icon { font-size:1.3rem; flex-shrink:0; }
+    .error-title { font-size:.95rem; font-weight:700; color:var(--red); font-family:'Cairo',sans-serif; }
+    .error-msg { font-size:.83rem; color:#ffaaaa; font-family:'Tajawal',sans-serif; line-height:1.6; }
+    .error-tip { margin-top:10px; padding:10px; background:#1a0000; border-radius:8px; font-size:.75rem; color:#cc8888; font-family:'Tajawal',sans-serif; line-height:1.8; }
+    .error-tip b { color:var(--red); }
+    .btn-retry { display:block; width:100%; margin-top:12px; padding:9px; background:transparent; border:1px solid var(--red); border-radius:8px; color:var(--red); font-size:.88rem; font-family:'Tajawal',sans-serif; cursor:pointer; transition:all .2s; }
+    .btn-retry:hover { background:#200000; }
 
-    .error-box {
-      background: #100000;
-      border: 1.5px solid var(--red);
-      border-radius: 12px;
-      padding: 16px 18px;
-    }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
-    footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 0.75rem;
-      color: #2a5a2a;
-    }
-    .ticker {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: #020e02;
-      border-top: 1px solid var(--green-dark);
-      height: 28px;
-      z-index: 100;
-      overflow: hidden;
-    }
-    .ticker-inner {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      white-space: nowrap;
-      animation: ticker 30s linear infinite;
-      gap: 60px;
-    }
-    @keyframes ticker {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+    /* Footer */
+    footer { margin-top:40px; text-align:center; font-size:.75rem; color:#2a5a2a; font-family:'Tajawal',sans-serif; line-height:1.8; }
+    footer a { color:var(--green-dim); text-decoration:none; }
+    footer a:hover { color:var(--green); }
+    .footer-heart { color:var(--red); }
 
-    @media (max-width: 480px) {
-      .card { padding: 20px 16px; }
-      .options-grid { grid-template-columns: 1fr; }
-    }
+    /* Ticker */
+    .ticker { position:fixed; bottom:0; left:0; right:0; background:#020e02; border-top:1px solid var(--green-dark); overflow:hidden; height:28px; z-index:100; }
+    .ticker-inner { display:flex; align-items:center; height:100%; white-space:nowrap; animation:tickAnim 30s linear infinite; gap:60px; }
+    .ticker-item { font-size:.7rem; color:var(--green-dim); font-family:'Tajawal',sans-serif; letter-spacing:1px; flex-shrink:0; }
+    .ticker-dot { color:var(--green); margin:0 8px; }
+    @keyframes tickAnim { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    @media(max-width:480px) { .card{padding:20px 16px} .options-grid{grid-template-columns:1fr} h1{font-size:2rem} }
+    @media(orientation:landscape) and (max-height:500px) { header{padding:16px 0} .card{padding:16px} }
   </style>
 </head>
 <body>
-
 <canvas id="matrix-canvas"></canvas>
 <div class="geo-overlay"></div>
 
@@ -482,32 +217,54 @@
   <div class="card">
     <label class="input-label" for="url-input">// أدخل رابط الفيديو</label>
     <div class="input-wrap">
-      <button class="paste-btn" id="paste-btn">📋</button>
-      <input type="url" id="url-input" placeholder="https://..." autocomplete="off" />
+      <button class="paste-btn" id="paste-btn" title="لصق">📋</button>
+      <input type="url" id="url-input"
+        placeholder="https://youtube.com/watch?v=... أو TikTok أو Instagram..."
+        autocomplete="off" spellcheck="false" />
     </div>
     <div class="platforms">
-      <span class="badge">▶ YouTube</span><span class="badge">♪ TikTok</span><span class="badge">📸 Instagram</span>
+      <span class="badge">▶ YouTube</span>
+      <span class="badge">♪ TikTok</span>
+      <span class="badge">📸 Instagram</span>
+      <span class="badge">🐦 Twitter/X</span>
+      <span class="badge">🎵 SoundCloud</span>
+      <span class="badge">+ المزيد</span>
+    </div>
+
+    <div class="api-status-row">
+      <div class="api-dot checking" id="api-dot"></div>
+      <span id="api-status-text">جاري التحقق من الخدمة...</span>
     </div>
 
     <div class="section-title">// اختر نوع الخطف</div>
     <div class="options-grid">
       <label class="option-card">
-        <input type="radio" name="dl-type" value="video" checked />
-        <div class="option-inner"><span class="option-icon">🎬</span><div class="option-text"><span class="option-name">فيديو</span><span class="option-desc">MP4</span></div></div>
+        <input type="radio" name="dl-type" value="video" id="opt-video" checked />
+        <div class="option-inner">
+          <span class="option-icon">🎬</span>
+          <div class="option-text"><span class="option-name">فيديو</span><span class="option-desc">MP4 / MKV</span></div>
+        </div>
       </label>
       <label class="option-card">
-        <input type="radio" name="dl-type" value="audio" />
-        <div class="option-inner"><span class="option-icon">🎵</span><div class="option-text"><span class="option-name">صوت فقط</span><span class="option-desc">MP3</span></div></div>
+        <input type="radio" name="dl-type" value="audio" id="opt-audio" />
+        <div class="option-inner">
+          <span class="option-icon">🎵</span>
+          <div class="option-text"><span class="option-name">صوت فقط</span><span class="option-desc">MP3 / AAC</span></div>
+        </div>
       </label>
     </div>
 
     <div class="quality-row" id="quality-row">
-      <label for="quality">// الجودة:</label>
+      <label for="quality">// جودة الفيديو:</label>
       <select id="quality">
-        <option value="max">أعلى جودة</option>
-        <option value="1080">1080p</option>
-        <option value="720" selected>720p</option>
+        <option value="max">أعلى جودة (Max)</option>
+        <option value="2160">4K – 2160p</option>
+        <option value="1440">2K – 1440p</option>
+        <option value="1080">Full HD – 1080p</option>
+        <option value="720" selected>HD – 720p</option>
         <option value="480">480p</option>
+        <option value="360">360p</option>
+        <option value="240">240p</option>
       </select>
     </div>
 
@@ -516,88 +273,220 @@
   </div>
 
   <footer>
-    <p>مشروع مفتوح المصدر &mdash; صُنع بإرادة جزائرية 🇩🇿</p>
-    <p>بواسطة وليد - El Khatef v1.2</p>
+    <p>مشروع مفتوح المصدر &mdash; <span class="footer-heart">♥</span> صُنع بإرادة جزائرية 🇩🇿</p>
+    <p>يستخدم <a href="https://cobalt.tools" target="_blank" rel="noopener">Cobalt API</a> &bull; لا نخزن أي بيانات &bull; كل شيء يصير في متصفحك</p>
+    <p style="margin-top:4px;color:#1a4a1a;">El Khatef v1.1 &mdash; open source &mdash; use responsibly</p>
   </footer>
 </div>
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-item">🦅 الخاطف جاهز</span><span class="ticker-dot">◆</span>
-    <span class="ticker-item">⚡ YouTube / TikTok / Instagram</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">🦅 الخاطف جاهز للخطف</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">⚡ YouTube / TikTok / Instagram / Twitter</span><span class="ticker-dot">◆</span>
     <span class="ticker-item">🇩🇿 صُنع بإرادة جزائرية</span><span class="ticker-dot">◆</span>
-    <span class="ticker-item">🦅 الخاطف جاهز</span><span class="ticker-dot">◆</span>
-    <span class="ticker-item">⚡ YouTube / TikTok / Instagram</span><span class="ticker-dot">◆</span>
-    <span class="ticker-item">🇩🇿 صُنع بإرادة جزائرية</span>
+    <span class="ticker-item">💚 مشروع مفتوح المصدر</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">🎵 فيديو + صوت بجودة عالية</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">🦅 الخاطف جاهز للخطف</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">⚡ YouTube / TikTok / Instagram / Twitter</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">🇩🇿 صُنع بإرادة جزائرية</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">💚 مشروع مفتوح المصدر</span><span class="ticker-dot">◆</span>
+    <span class="ticker-item">🎵 فيديو + صوت بجودة عالية</span><span class="ticker-dot">◆</span>
   </div>
 </div>
 
 <script>
-  // Matrix Effect (Algerian Flavor)
-  (function initMatrix() {
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
-    const chars = '0123456789ابتثجحخدذرزسشصضطظعغفقكلمنهوي⵰ⴳⵢⵎ'.split('');
-    let cols, drops;
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; cols = Math.floor(canvas.width / 18); drops = Array(cols).fill(1); }
-    function draw() { ctx.fillStyle = 'rgba(5,13,5,0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#00c853'; ctx.font = '14px monospace'; for (let i = 0; i < drops.length; i++) { const ch = chars[Math.floor(Math.random() * chars.length)]; ctx.fillText(ch, i * 18, drops[i] * 18); if (drops[i] * 18 > canvas.height && Math.random() > 0.975) drops[i] = 0; drops[i]++; } }
-    resize(); window.addEventListener('resize', resize); setInterval(draw, 60);
-  })();
+/* ── MATRIX ── */
+(function(){
+  const cv = document.getElementById('matrix-canvas');
+  const cx = cv.getContext('2d');
+  const ch = '0123456789ابتثجحخدذرزسشصضطظعغفقكلمنهوي⵰ⴳⵢ'.split('');
+  let cols, drops;
+  function resize(){ cv.width=innerWidth; cv.height=innerHeight; cols=Math.floor(innerWidth/18); drops=Array(cols).fill(1); }
+  function draw(){
+    cx.fillStyle='rgba(5,13,5,0.05)'; cx.fillRect(0,0,cv.width,cv.height);
+    cx.fillStyle='#00c853'; cx.font='14px monospace';
+    for(let i=0;i<drops.length;i++){
+      cx.fillText(ch[Math.floor(Math.random()*ch.length)],i*18,drops[i]*18);
+      if(drops[i]*18>cv.height&&Math.random()>0.975) drops[i]=0;
+      drops[i]++;
+    }
+  }
+  resize(); addEventListener('resize',resize); setInterval(draw,60);
+})();
 
-  const $ = id => document.getElementById(id);
-  const urlInput = $('url-input');
-  const btnKhatef = $('btn-khatef');
-  const statusArea = $('status-area');
+/* ── CONFIG ── */
+// Cobalt v10 API: POST to {base}/ with Accept: application/json
+// Trying multiple public instances as fallback
+const INSTANCES = [
+  'https://api.cobalt.tools',
+  'https://cobalt.synzr.space',
+  'https://cobalt.api.timelessnesses.me',
+  'https://co.wuk.sh',
+];
 
-  $('paste-btn').addEventListener('click', async () => { try { urlInput.value = await navigator.clipboard.readText(); } catch {} });
+/* ── REFS ── */
+const $        = id => document.getElementById(id);
+const urlInput   = $('url-input');
+const btnKhatef  = $('btn-khatef');
+const statusArea = $('status-area');
+const qualityRow = $('quality-row');
+const pasteBtn   = $('paste-btn');
+const apiDot     = $('api-dot');
+const apiText    = $('api-status-text');
 
-  // THE FIXED DOWNLOAD LOGIC
-  async function khatef() {
-    const url = urlInput.value.trim();
-    const isAudio = document.querySelector('input[name="dl-type"]:checked').value === 'audio';
-    const quality = $('quality').value;
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-    if (!url) { showError('حط الرابط يا وليد!'); return; }
+/* ── Toggle quality row ── */
+document.querySelectorAll('input[name="dl-type"]').forEach(r => {
+  r.addEventListener('change', () => { qualityRow.style.display = r.value==='audio' ? 'none' : 'flex'; });
+});
 
-    btnKhatef.disabled = true;
-    statusArea.innerHTML = '<div class="loading-box"><div class="loader-ring"></div><p class="loading-text">🦅 الخاطف راهو "يصيد" في الرابط...</p></div>';
+/* ── Paste ── */
+pasteBtn.addEventListener('click', async () => {
+  try { urlInput.value=(await navigator.clipboard.readText()).trim(); urlInput.focus(); }
+  catch { urlInput.focus(); }
+});
+urlInput.addEventListener('focus', async () => {
+  if(urlInput.value) return;
+  try { const t=(await navigator.clipboard.readText()).trim(); if(/^https?:\/\/.+\..+/.test(t)) urlInput.value=t; } catch{}
+});
 
-    try {
-      // Direct call with basic settings - usually works better on mobile
-      const response = await fetch('https://api.cobalt.tools/api/json', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          url: url,
-          videoQuality: quality,
-          isAudioOnly: isAudio,
-          filenameStyle: 'basic'
-        })
-      });
+/* ── API health check ── */
+(async function(){
+  apiDot.className='api-dot checking'; apiText.textContent='جاري التحقق من الخدمة...';
+  try {
+    const ac=new AbortController(); const id=setTimeout(()=>ac.abort(),6000);
+    const r=await fetch(INSTANCES[0]+'/',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({url:'https://example.com'}),signal:ac.signal});
+    clearTimeout(id);
+    apiDot.className='api-dot online'; apiText.textContent='الخدمة متصلة ✓';
+  } catch(e) {
+    if(/abort/i.test(e.message)||e.name==='AbortError'){
+      apiDot.className='api-dot checking'; apiText.textContent='الخدمة بطيئة قليلاً — ستحاول تلقائياً';
+    } else {
+      apiDot.className='api-dot offline'; apiText.textContent='تحذير CORS — شوف التعليمات عند الخطأ';
+    }
+  }
+})();
 
-      const data = await response.json();
+/* ── Show Loading ── */
+function showLoading(){
+  const rows = INSTANCES.map((inst,i) =>
+    `<div class="instance-row"><div class="inst-dot" id="id${i}"></div><span>${inst.replace('https://','')}</span></div>`
+  ).join('');
+  statusArea.innerHTML=`
+    <div class="loading-box">
+      <div class="loader-ring"></div>
+      <p class="loading-text">🦅 جاري خطف الملف...</p>
+      <p class="loading-sub">اصبر شويا... الخاطف شادّ الرابط</p>
+      <div class="instances-bar">${rows}</div>
+      <div class="dots"><span></span><span></span><span></span></div>
+    </div>`;
+}
+function setDot(i,state){ const d=$('id'+i); if(d) d.className='inst-dot '+state; }
 
-      if (data.status === 'stream' || data.url) {
-        showResult(data.url || data.audio, isAudio);
-      } else if (data.status === 'error') {
-        throw new Error(data.text || 'Error');
-      } else {
-        throw new Error('فشل في جلب الرابط');
-      }
-    } catch (err) {
-      showError('مشكلة في CORS أو الرابط غير مدعوم. تأكد من الإنترنت أو جرب رابط YouTube.');
-    } finally {
-      btnKhatef.disabled = false;
+/* ── Show Result ── */
+function showResult(url, isAudio){
+  const icon=isAudio?'🎵':'🎬', label=isAudio?'حمّل الصوت (MP3)':'حمّل الفيديو';
+  statusArea.innerHTML=`
+    <div class="result-box">
+      <div class="result-top">
+        <div class="success-icon">✓</div>
+        <div><div class="result-title">✅ تم الخطف بنجاح!</div><div class="result-sub">الملف جاهز — انقر للتحميل المباشر</div></div>
+      </div>
+      <a href="${esc(url)}" target="_blank" rel="noopener" class="btn-download" download>${icon} ${label} — تحميل مباشر</a>
+      <button class="btn-reset" id="btn-reset">⟳ خطف رابط آخر</button>
+    </div>`;
+  $('btn-reset').addEventListener('click', reset);
+}
+
+/* ── Show Error ── */
+function showError(msg, isCors){
+  const tip = isCors ? `
+    <div class="error-tip">
+      <b>💡 لحل مشكلة CORS:</b><br>
+      ① جرب متصفح Firefox — يدعم CORS أحسن من Chrome<br>
+      ② أو ثبّت امتداد "CORS Unblock" في Chrome<br>
+      ③ أو شغّل VPN وعاود المحاولة<br>
+      ④ للمطورين: ارفع الموقع مع backend proxy خاص بك
+    </div>` : '';
+  statusArea.innerHTML=`
+    <div class="error-box">
+      <div class="error-top"><span class="error-icon">⚠️</span><span class="error-title">حدث خطأ — يحاول الخاطف!</span></div>
+      <p class="error-msg">${esc(msg)}</p>${tip}
+      <button class="btn-retry" id="btn-retry">↩ حاول مرة أخرى</button>
+    </div>`;
+  $('btn-retry').addEventListener('click', reset);
+}
+
+function reset(){
+  statusArea.innerHTML=''; btnKhatef.disabled=false;
+  btnKhatef.textContent='🦅 احكم! — خطف الآن'; urlInput.focus();
+}
+
+/* ── Try one instance ── */
+async function tryOne(base, body){
+  const ac=new AbortController(); const id=setTimeout(()=>ac.abort(),15000);
+  try {
+    const r=await fetch(base+'/',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(body), signal:ac.signal
+    });
+    clearTimeout(id);
+    if(!r.ok){ let t=`HTTP ${r.status}`; try{const j=await r.json(); t=j.error?.code||j.text||t;}catch{} throw new Error(t); }
+    const d=await r.json();
+    if(d.status==='error') throw new Error(d.error?.code||d.text||'cobalt_error');
+    const url=d.url||d.audio||(d.picker&&d.picker[0]?.url);
+    if(!url) throw new Error('no_url_in_response');
+    return url;
+  } catch(e){ clearTimeout(id); throw e; }
+}
+
+/* ── MAIN KHATEF ── */
+async function khatef(){
+  const url    = urlInput.value.trim();
+  const isAudio= document.querySelector('input[name="dl-type"]:checked').value==='audio';
+  const quality= $('quality').value;
+
+  if(!url){ showError('راك ما حطيتش الرابط! — أدخل رابط الفيديو أولاً.',false); return; }
+  if(!/^https?:\/\/.+\..+/.test(url)){ showError('الرابط ما صحيحش — تأكد وعاود.',false); return; }
+
+  btnKhatef.disabled=true; btnKhatef.textContent='⏳ يخطف...';
+  showLoading();
+
+  // Cobalt v10 body
+  const body={url, filenameStyle:'basic'};
+  if(isAudio){ body.isAudioOnly=true; body.audioFormat='mp3'; }
+  else { body.isAudioOnly=false; body.videoQuality=quality==='max'?'max':quality; body.vCodec='h264'; }
+
+  let dlUrl=null, lastErr=null, isCors=false;
+
+  for(let i=0;i<INSTANCES.length;i++){
+    setDot(i,'trying');
+    try { dlUrl=await tryOne(INSTANCES[i],body); setDot(i,'success'); break; }
+    catch(e){
+      setDot(i,'fail'); lastErr=e;
+      if(/fetch|Failed to fetch|NetworkError|CORS|Load failed|abort/i.test(e.message)) isCors=true;
     }
   }
 
-  function showResult(dl, isA) {
-    statusArea.innerHTML = `<div class="result-box"><a href="${dl}" target="_blank" class="btn-download">✅ احكم! تحميل مباشر</a><button onclick="location.reload()" style="background:none; border:1px solid #00c853; color:#00c853; width:100%; margin-top:10px; padding:8px; border-radius:8px; cursor:pointer;">خطف رابط آخر</button></div>`;
-  }
+  if(dlUrl){ showResult(dlUrl,isAudio); btnKhatef.disabled=false; btnKhatef.textContent='🦅 احكم! — خطف الآن'; return; }
 
-  function showError(m) { statusArea.innerHTML = `<div class="error-box"><p style="color:#ff1744; font-weight:700;">⚠️ خطأ:</p><p style="font-size:0.85rem;">${m}</p></div>`; }
-  
-  btnKhatef.addEventListener('click', khatef);
+  let msg=lastErr?.message||'خطأ غير معروف';
+  if(isCors||/fetch|Failed to fetch|Load failed/i.test(msg)){
+    msg='مشكلة CORS — المتصفح يمنع الطلبات المباشرة لـ Cobalt API.'; isCors=true;
+  } else if(/nsfw/i.test(msg))              msg='المحتوى غير مسموح به.';
+  else if(/no_matching_format/i.test(msg))  msg='ما لقاش الصيغة — جرب جودة مختلفة.';
+  else if(/invalid_url/i.test(msg))         msg='الرابط غلط أو غير مدعوم من Cobalt.';
+  else if(/rate_exceeded/i.test(msg))       msg='تجاوزت الحد المسموح — اصبر شوية وعاود.';
+  else if(/no_url_in_response/i.test(msg))  msg='Cobalt ما رجعش رابط — جرب منصة أخرى أو نوع مختلف.';
+
+  showError(msg,isCors);
+  btnKhatef.disabled=false; btnKhatef.textContent='🦅 احكم! — خطف الآن';
+}
+
+btnKhatef.addEventListener('click', khatef);
+urlInput.addEventListener('keydown', e=>{ if(e.key==='Enter') khatef(); });
 </script>
 </body>
 </html>
