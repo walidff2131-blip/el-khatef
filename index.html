@@ -304,7 +304,7 @@
      audioFormat       – "best"|"mp3"|"ogg"|"wav"|"opus"
      filenameStyle     – "classic"|"pretty"|"basic"|"nerdy"
 ══════════════════════════════════════════ */
-const API_BASE = 'https://api.cobalt.tools';
+const API_BASE = 'https://corsproxy.io/?https://api.cobalt.tools';
 
 /* ── Refs ── */
 const $          = id => document.getElementById(id);
@@ -445,11 +445,11 @@ function resetUI(){
 async function callCobalt(videoUrl, isAudio, quality){
   /*
    * Cobalt v10 parameter reference:
-   *   downloadMode      : "auto" = video+audio, "audio" = audio only, "mute" = video no audio
-   *   youtubeVideoCodec : "h264" | "av1" | "vp9"  (replaces old vCodec)
-   *   videoQuality      : "max" | "2160" | "1440" | "1080" | "720" | "480" | "360" | "240" | "144"
-   *   audioFormat       : "best" | "mp3" | "ogg" | "wav" | "opus"
-   *   filenameStyle     : "classic" | "pretty" | "basic" | "nerdy"
+   * downloadMode      : "auto" = video+audio, "audio" = audio only, "mute" = video no audio
+   * youtubeVideoCodec : "h264" | "av1" | "vp9"  (replaces old vCodec)
+   * videoQuality      : "max" | "2160" | "1440" | "1080" | "720" | "480" | "360" | "240" | "144"
+   * audioFormat       : "best" | "mp3" | "ogg" | "wav" | "opus"
+   * filenameStyle     : "classic" | "pretty" | "basic" | "nerdy"
    */
   const body = {
     url:          videoUrl,
